@@ -3,7 +3,12 @@ import { client } from '@/sanity'
 import Link from 'next/link'
 
 const fetchProducts = async () => {
-    const query = "*[_type == 'product']"
+    const query = `
+        *[_type == 'product'] {
+            _id, name, price, image,
+            "slug": slug.current
+        }
+    `
     const products = await client.fetch(query)
     return products
 }
