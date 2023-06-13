@@ -32,7 +32,7 @@ export default async function page({params: { slug }}) {
             <section className='bg-slate-200 py-12'>
                 <div className="container">
                     <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
-                        {products.map(item => <ProductCard p={item} />)}
+                        {products.map(item => <ProductCard key={item._id} p={item} />)}
                     </div>
                 </div>
             </section>
