@@ -24,7 +24,7 @@ export default async function page({ searchParams }) {
                         <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
                             {result.map(item => <ProductCard key={item._id} p={item} />)}
                         </div> :
-                        <h1 className='text-center text-lg font-semibold'>Sorry, there's no matches</h1>
+                        <h1 className='text-center text-lg font-semibold'>Sorry, there is no matches</h1>
                     }
                 </div>
             </section>
