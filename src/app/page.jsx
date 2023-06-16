@@ -4,10 +4,11 @@ import Link from 'next/link'
 
 const fetchProducts = async () => {
     const query = `
-        *[_type == 'product'] {
+        *[_type == 'product'] | order(_createdAt desc) {
             _id, name, price, image,
             "slug": slug.current
         }
+        [0...10]
     `
     const products = await client.fetch(query)
     return products
@@ -37,6 +38,7 @@ export default async function Home() {
             </div>
             <section className='bg-slate-200 py-12'>
                 <div className='container'>
+                    <h2 className='text-3xl font-semibold text-center mb-6'>Latest stock</h2>
                     <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
                         {products.map(p => <ProductCard key={p._id} p={p} />)}
                     </div>

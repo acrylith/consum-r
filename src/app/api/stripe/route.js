@@ -29,29 +29,17 @@ export async function POST(req, res) {
         try {
           // Create Checkout Sessions from body params.
           const session = await stripe.checkout.sessions.create({
-            line_items: cart.map(item => createLineObject(item)),
-            // line_items:[
-            //     {
-            //         price_data: {
-            //             currency: 'gbp',
-            //             unit_amount: 16 * 100,
-            //             product_data: {
-            //                 name: 'Headphones',
-            //                 images: ['https://cdn.sanity.io/images/br4efbim/production/1c07c236db0dbfafb74621e483cfab6b202e83a7-500x492.jpg']
-            //             }
-            //         },
-            //         adjustable_quantity: {
-            //             enabled: true,
-            //             minimum: 1,
-            //             maximum: 10
-            //         },
-            //         quantity: 1
-            //     }
-            // ],
+            line_items: cart.map(item => createLineObject(item)),           
             submit_type: 'pay',
             mode: 'payment',
+            invoice_creation: {
+                enabled: true
+            },
             payment_method_types: ['card'],
             billing_address_collection: 'auto',
+            shipping_address_collection: {
+                allowed_countries: ['UA', 'GB', 'PL']
+            },
             shipping_options: [
                 { shipping_rate: 'shr_1NHoSPHV3IoOa2eXABIHbBUA' },
                 { shipping_rate: 'shr_1NHoTaHV3IoOa2eXYRC5Emge' }
